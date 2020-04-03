@@ -7,7 +7,7 @@ import superhero from "../assets/woman-superhero.png";
 import vampire from "../assets/woman-vampire.png";
 import police from "../assets/woman-police-officer.png";
 
-const sources = [
+const imgs = [
   alien,
   cook,
   astronaut,
@@ -17,5 +17,7 @@ const sources = [
   vampire,
   police
 ];
+
+const sources = [...imgs, ...imgs];
 
 export default sources;

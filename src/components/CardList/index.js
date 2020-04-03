@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
 
-import { Container } from "./styles";
+import { Container, Cards, GameInformations } from "./styles";
+import { shuffle } from "../../utils/array";
 
 import Card from "../Card";
-import emojis from "../../services/emojis";
+import sources from "../../services/emojis";
+
+shuffle(sources);
 
 export default function CardList() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [savedSources, setSavedSources] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [matches, setMatches] = useState(0);
+  const [running, setRunning] = useState(true);
+  const [moves, setMoves] = useState(0);
 
   function selectCard(setShowCard, source) {
-    if (selectedCards.length < 2) {
-      setShowCard(true);
+    if (running) {
+      if (selectedCards.length < 2) {
+        setShowCard(true);
+      }
+      setSelectedCards(selected => [...selected, setShowCard]);
+      setSavedSources(sources => [...sources, source]);
+      setMoves(moves => moves + 1);
     }
-    setSelectedCards(selected => [...selected, setShowCard]);
-    setSavedSources(sources => [...sources, source]);
   }
 
   function clearStates() {
@@ -42,13 +50,15 @@ export default function CardList() {
       return setShow(false);
     });
     setMatches(0);
+    setMoves(0);
+    setRunning(true);
     clearStates();
   }
 
   useEffect(() => {
-    if (matches === 8) {
+    if (matches === Math.floor(sources.length / 2)) {
+      setRunning(false);
       alert("Parabens! Você venceu!");
-      endGame();
     }
   }, [matches]);
 
@@ -62,12 +72,22 @@ export default function CardList() {
     }
   }, [selectedCards, savedSources]);
 
-  const sources = [...emojis, ...emojis];
   return (
     <Container>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(item => (
-        <Card key={item} selectCard={selectCard} source={sources[item]} />
-      ))}
+      <Cards>
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(item => (
+          <Card key={item} selectCard={selectCard} source={sources[item]} />
+        ))}
+      </Cards>
+
+      <GameInformations>
+        <p>Movimentos: {moves}</p>
+        {!running ? (
+          <button className="new-game-button" onClick={endGame}>
+            Novo jogo
+          </button>
+        ) : null}
+      </GameInformations>
     </Container>
   );
 }

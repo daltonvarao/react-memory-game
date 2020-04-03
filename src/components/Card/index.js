@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Container, Image } from "./styles";
 
@@ -6,7 +6,6 @@ export default function Card({ source, selectCard }) {
   const [show, setShow] = useState(false);
 
   function showImage() {
-    // setShow(true);
     selectCard(setShow, source);
   }
 

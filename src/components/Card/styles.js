@@ -23,7 +23,6 @@ export const Container = styled.button`
   transition: color 0.2s;
 
   :hover {
-    cursor: pointer;
     opacity: 0.9;
     transition: opacity 0.2s;
   }

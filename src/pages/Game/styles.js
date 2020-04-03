@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +24,6 @@ export const Header = styled.header`
     height: 26px;
     margin-right: 1rem;
     outline: none;
-    cursor: pointer;
   }
 `;
 
