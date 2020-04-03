@@ -10,7 +10,9 @@ export default function Game() {
   const history = useHistory();
 
   function goBack() {
-    history.goBack();
+    return window.confirm("Deseja realmente sair? Seu progresso será perdido!")
+      ? history.goBack()
+      : null;
   }
 
   return (
