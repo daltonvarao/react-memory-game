@@ -10,6 +10,10 @@ export default function Home() {
     history.push("/game");
   }
 
+  function handleScoreBoard() {
+    history.push("/scores");
+  }
+
   return (
     <Container>
       <Header>
@@ -17,6 +21,7 @@ export default function Home() {
       </Header>
       <Menu>
         <Button onClick={handleNewGame}>Novo Jogo</Button>
+        <Button onClick={handleScoreBoard}>Seu Score</Button>
       </Menu>
     </Container>
   );

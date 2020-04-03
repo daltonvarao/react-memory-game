@@ -19,13 +19,19 @@ export const HeaderTitle = styled.h2``;
 export const Menu = styled.section`
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  button + button {
+    margin-top: 1rem;
+  }
 `;
 
 export const Button = styled.button`
   padding: 1rem 3rem;
   height: 4rem;
+  width: 14rem;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;

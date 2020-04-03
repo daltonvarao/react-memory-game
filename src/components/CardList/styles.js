@@ -19,7 +19,7 @@ export const GameInformations = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 2rem;
 
   .new-game-button {
     font-size: 24px;

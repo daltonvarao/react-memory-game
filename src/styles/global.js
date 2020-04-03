@@ -7,6 +7,7 @@ export default createGlobalStyle`
     color: #333;
     font-family: 'Sen', sans-serif;
     box-sizing: border-box;
+    list-style-type: none;
   }
 
   html, body, #root {

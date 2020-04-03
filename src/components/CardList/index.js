@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Container, Cards, GameInformations } from "./styles";
 import { shuffle } from "../../utils/array";
+import { setLastScore } from "../../services/score";
 
 import Card from "../Card";
 import sources from "../../services/emojis";
@@ -58,6 +59,7 @@ export default function CardList() {
   useEffect(() => {
     if (matches === Math.floor(sources.length / 2)) {
       setRunning(false);
+      setLastScore(moves);
       alert("Parabens! Você venceu!");
     }
   }, [matches]);
