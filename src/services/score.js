@@ -10,12 +10,16 @@ const storagePrefix = "daltonmemorygame@";
 
 export function setLastScore(value) {
   let lastestScores = getLastScores();
-  let minValue = lastestScores.pop();
 
-  if (lastestScores.length >= 5) {
-    if (value < minValue) return;
-    lastestScores.push(value);
+  if (lastestScores.length === 5) {
+    let maxValue = Math.max(lastestScores);
+
+    if (value > maxValue) return;
+
+    lastestScores.pop();
   }
+
+  lastestScores.unshift(value);
 
   localStorage.setItem(
     `${storagePrefix}:latestScores`,
@@ -30,7 +34,6 @@ export function getLastScores() {
     ? scores
         .split(";")
         .sort()
-        .reverse()
-        .map(i => parseInt(i))
+        .map((i) => parseInt(i))
     : [];
 }

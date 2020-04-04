@@ -5,7 +5,7 @@ export const Container = styled.div`
   padding-top: 5em;
   display: flex;
   flex-direction: column;
-  max-width: 350px;
+  max-width: 388px;
   margin: 0 auto;
 
   h2.title {

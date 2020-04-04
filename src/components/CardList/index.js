@@ -12,42 +12,48 @@ shuffle(sources);
 export default function CardList() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [savedSources, setSavedSources] = useState([]);
+  const [currentKey, setCurrentKey] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [matches, setMatches] = useState(0);
   const [running, setRunning] = useState(true);
   const [moves, setMoves] = useState(0);
 
-  function selectCard(setShowCard, source) {
+  function selectCard(setShowCard, source, keyPos, show) {
     if (running) {
+      if (keyPos === currentKey || show) return;
+
       if (selectedCards.length < 2) {
         setShowCard(true);
+
+        setSelectedCards((selected) => [...selected, setShowCard]);
+        setSavedSources((sources) => [...sources, source]);
+        setCurrentKey(keyPos);
+        setMoves((moves) => moves + 1);
       }
-      setSelectedCards(selected => [...selected, setShowCard]);
-      setSavedSources(sources => [...sources, source]);
-      setMoves(moves => moves + 1);
     }
   }
 
   function clearStates() {
     setSelectedCards([]);
     setSavedSources([]);
+    setCurrentKey([]);
   }
 
   function match() {
-    setMatches(matches => matches + 1);
-    setMatchedCards(matcheds => [...selectedCards, ...matcheds]);
+    setMatches((matches) => matches + 1);
+    setMatchedCards((matcheds) => [...selectedCards, ...matcheds]);
     clearStates();
   }
 
   function discard() {
-    selectedCards.map(setShow => {
+    selectedCards.map((setShow) => {
       return setShow(false);
     });
     clearStates();
   }
 
   function endGame() {
-    matchedCards.map(setShow => {
+    matchedCards.map((setShow) => {
       return setShow(false);
     });
     setMatches(0);
@@ -77,8 +83,13 @@ export default function CardList() {
   return (
     <Container>
       <Cards>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(item => (
-          <Card key={item} selectCard={selectCard} source={sources[item]} />
+        {[...Array(16)].map((v, item) => (
+          <Card
+            key={item}
+            keyPos={item}
+            selectCard={selectCard}
+            source={sources[item]}
+          />
         ))}
       </Cards>
 

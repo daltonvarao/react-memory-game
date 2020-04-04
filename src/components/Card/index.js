@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 
 import { Container, Image } from "./styles";
 
-export default function Card({ source, selectCard }) {
+function Card({ source, selectCard, keyPos }) {
   const [show, setShow] = useState(false);
 
   function showImage() {
-    selectCard(setShow, source);
+    selectCard(setShow, source, keyPos, show);
   }
 
   return (
@@ -15,3 +15,5 @@ export default function Card({ source, selectCard }) {
     </Container>
   );
 }
+
+export default memo(Card);

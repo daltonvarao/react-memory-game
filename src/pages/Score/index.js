@@ -20,7 +20,7 @@ export default function Score() {
       <h2 className="title">Melhores Scores</h2>
       <ListContainer>
         {scores.map((score, index) => (
-          <ListItem>
+          <ListItem key={index}>
             <h3>#{index + 1}</h3> {score} movimentos
           </ListItem>
         ))}
