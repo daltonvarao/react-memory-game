@@ -60,6 +60,7 @@ export default function CardList() {
     setMoves(0);
     setRunning(true);
     clearStates();
+    shuffle(sources);
   }
 
   useEffect(() => {
